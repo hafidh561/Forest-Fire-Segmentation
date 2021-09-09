@@ -59,7 +59,7 @@ You can use this code for other segmentation, but you must have color space meth
 
 ```bash
 $ pip install -r requirement.txt
-$ # this is command optional, just for example video source \
+$ # this is command optional, just for example video source
 $ python download_video.py
 ```
 
