@@ -3,7 +3,7 @@
 ## Description
 
 Fire segmentation in your video forest fire with GUI application based. \
-You can use this code for other segmentation, but you must have color space method, value upper bound, value lower bound and your video for segmentation.
+You can use this code for other segmentation, but you must have a color space method, value upper bound, a value lower bound and your video for segmentation.
 
 ## Recommended Value
 
@@ -58,14 +58,17 @@ You can use this code for other segmentation, but you must have color space meth
 ### Installation Python
 
 ```bash
-$ pip install -r requirement.txt
-$ # this is command optional, just for example video source
+# Python version 3.8 or more
+$ pip install -r requirements.txt
+
+# (Optional) Download example video
 $ python download_video.py
 ```
 
 ### Installation Docker
 
 ```bash
+# Newest docker version
 $ docker build -t hafidh561/forest-fire-segmentation:1.0 .
 ```
 
@@ -75,7 +78,8 @@ $ docker build -t hafidh561/forest-fire-segmentation:1.0 .
 
 ```bash
 $ python app.py -h
-usage: app.py [-h] [-l LOWER [LOWER ...]] [-u UPPER [UPPER ...]] [-m METHOD] [-v VIDEO]
+usage: app.py [-h] [-l LOWER [LOWER ...]] [-u UPPER [UPPER ...]] [-m METHOD] [-haf HIGH_AREA_FIRE] [-maf MEDIUM_AREA_FIRE] [-laf LOW_AREA_FIRE]
+              [-v VIDEO] [-ffv FOREST_FIRE_VIDEO]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -85,19 +89,53 @@ optional arguments:
                         Input your upper bound value
   -m METHOD, --method METHOD
                         Input your color space method
+  -haf HIGH_AREA_FIRE, --high-area-fire HIGH_AREA_FIRE
+                        Input your minimal value to detect high area fire
+  -maf MEDIUM_AREA_FIRE, --medium-area-fire MEDIUM_AREA_FIRE
+                        Input your minimal value to detect medium area fire
+  -laf LOW_AREA_FIRE, --low-area-fire LOW_AREA_FIRE
+                        Input your minimal value to detect low area fire
   -v VIDEO, --video VIDEO
                         Input your video source
+  -ffv FOREST_FIRE_VIDEO, --forest-fire-video FOREST_FIRE_VIDEO
+                        Forest fire video True or False
 
-$ # Example arguments input
-$ python app.py -l 121 21 14 -u 255 255 193 -m ycrcb -v ./src/video2.mp4
+# Example arguments input
+$ python app.py -l 121 21 14 -u 255 255 193 -m ycrcb -haf 7000 -maf 3500 -laf 100 -v ./src/video2.mp4 -ffv true
 ```
 
 ### Usage Docker
 
+#### Prerequisite for Windows
+
+1. Download and install [VcXsrv](https://sourceforge.net/projects/vcxsrv/)
+2. Run VcXsrv before run this docker app
+
+#### Prerequisite for Linux
+
+```bash
+# Exposo your xhost
+$ xhost +local:docker
+
+# When you finish, you can return the access control by using the following
+$ # xhost -local:docker
+
+# Add environment variables
+$ XSOCK=/tmp/.X11-unix
+$ XAUTH=/tmp/.docker.xauth
+
+# Create the authentication files
+$ touch /tmp/.docker.xauth
+
+# Create permission
+$ xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
+```
+
 ```bash
 $ docker run --rm -e hafidh561/forest-fire-segmentation:1.0 -h
 usage: app.py [-h] [-l LOWER [LOWER ...]] [-u UPPER [UPPER ...]] [-m METHOD]
-              [-v VIDEO]
+              [-haf HIGH_AREA_FIRE] [-maf MEDIUM_AREA_FIRE]
+              [-laf LOW_AREA_FIRE] [-v VIDEO] [-ffv FOREST_FIRE_VIDEO]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -107,16 +145,24 @@ optional arguments:
                         Input your upper bound value
   -m METHOD, --method METHOD
                         Input your color space method
+  -haf HIGH_AREA_FIRE, --high-area-fire HIGH_AREA_FIRE
+                        Input your minimal value to detect high area fire
+  -maf MEDIUM_AREA_FIRE, --medium-area-fire MEDIUM_AREA_FIRE
+                        Input your minimal value to detect medium area fire
+  -laf LOW_AREA_FIRE, --low-area-fire LOW_AREA_FIRE
+                        Input your minimal value to detect low area fire
   -v VIDEO, --video VIDEO
                         Input your video source
+  -ffv FOREST_FIRE_VIDEO, --forest-fire-video FOREST_FIRE_VIDEO
+                        Forest fire video True or False
 
-$ # Example arguments input
-$ docker run --rm -e DISPLAY=192.168.0.2:0 hafidh561/forest-fire-segmentation:1.0 -l 121 21 14 -u 255 255 193 -m hsv -v ./src/video2.mp4
+# Example arguments input
+$ docker run --rm -e DISPLAY=192.168.0.2:0 hafidh561/forest-fire-segmentation:1.0 -l 121 21 14 -u 255 255 193 -m hsv -haf 7000 -maf 3500 -laf 100 -v ./src/video2.mp4 -ffv true
 
-$ # For Operating System Windows
-$ docker run --rm -e DISPLAY=<your local ip address> hafidh561/forest-fire-segmentation:1.0
+# For Operating System Windows
+$ docker run --rm -e DISPLAY=<your local ip address>:0 hafidh561/forest-fire-segmentation:1.0
 
-$ # For Operating System Linux
+# For Operating System Linux
 $ docker run --rm -e DISPLAY=$DISPLAY hafidh561/forest-fire-segmentation:1.0
 ```
 
@@ -132,10 +178,10 @@ $ docker run --rm -e DISPLAY=$DISPLAY hafidh561/forest-fire-segmentation:1.0
 
 ## License
 
-See [LICENSE](./LICENSE).
+[MIT LICENSE](./LICENSE)
 
 ## Changelog
 
 -   **1.0** Forest Fire Segmentation
 
-© Developed by [hafidh561](https://github.com/hafidh561).
+© Developed by [hafidh561](https://github.com/hafidh561) - Internship at Nodeflux

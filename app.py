@@ -1,4 +1,4 @@
-from ForestFireSegmentation import ForestFireSegmentation
+from ForestFireSegmentation.ForestFireSegmentation import ForestFireSegmentation
 from tkinter import messagebox
 import tkinter as tk
 import numpy as np
@@ -11,6 +11,9 @@ LOWER_VALUE = np.array((82, 0, 159), dtype="uint8")
 UPPER_VALUE = np.array((255, 255, 255), dtype="uint8")
 METHOD = "lab"
 SOURCE_VIDEO = "./src/video1.mp4"
+HIGH_AREA_FIRE = 7000
+MEDIUM_AREA_FIRE = 3500
+LOW_AREA_FIRE = 100
 
 # Define Variable
 total_large_of_fire = []
@@ -40,18 +43,55 @@ parser.add_argument(
     help="Input your color space method",
 )
 parser.add_argument(
+    "-haf",
+    "--high-area-fire",
+    type=int,
+    default=HIGH_AREA_FIRE,
+    help="Input your minimal value to detect high area fire",
+)
+parser.add_argument(
+    "-maf",
+    "--medium-area-fire",
+    type=int,
+    default=MEDIUM_AREA_FIRE,
+    help="Input your minimal value to detect medium area fire",
+)
+parser.add_argument(
+    "-laf",
+    "--low-area-fire",
+    type=int,
+    default=LOW_AREA_FIRE,
+    help="Input your minimal value to detect low area fire",
+)
+parser.add_argument(
     "-v",
     "--video",
     default=SOURCE_VIDEO,
     help="Input your video source",
+)
+parser.add_argument(
+    "-ffv",
+    "--forest-fire-video",
+    default="true",
+    help="Forest fire video True or False",
 )
 value_parser = parser.parse_args()
 
 # Check Value Lower and Upper Bound
 if len(value_parser.lower) != 3 or len(value_parser.upper) != 3:
     raise "Input upper bound and lower bound values correctly!"
+for i in value_parser.lower:
+    if i < 0:
+        raise "Input upper bound and lower bound values correctly!"
+for i in value_parser.upper:
+    if i < 0:
+        raise "Input upper bound and lower bound values correctly!"
 value_parser.lower = np.array(tuple(value_parser.lower), dtype="uint8")
 value_parser.upper = np.array(tuple(value_parser.upper), dtype="uint8")
+
+# Check High Area of Fire
+if value_parser.high_area_fire < 0 or value_parser.medium_area_fire < 0 or value_parser.low_area_fire < 0:
+    raise "Input your area fire correctly!"
 
 # Check Format Video
 mimetypes.init()
@@ -60,6 +100,14 @@ if mimestart != None:
     mimestart = mimestart.split("/")[0]
     if mimestart not in ["video"]:
         raise "Input video source correctly!"
+
+# Check Forest Fire Video Statement
+if value_parser.forest_fire_video.lower() == "false":
+    value_parser.forest_fire_video = False
+elif value_parser.forest_fire_video.lower() == "true":
+    value_parser.forest_fire_video = True
+else:
+    raise "Input your forest fire video is True or False!"
 
 # Make Function to Stack Images
 def stack_images(scale, img_array):
@@ -135,66 +183,67 @@ while True:
     ffs.draw_large_of_fire(img_preprocessing, img_draw)
 
     # Check Fires
-    if large_of_fire > 7000:
-        cv2.rectangle(img_draw, (20, 20), (230, 85), (0, 255, 0), cv2.FILLED)
-        cv2.putText(
-            img_draw,
-            f"{round(large_of_fire)}",
-            (30, 70),
-            cv2.FONT_HERSHEY_PLAIN,
-            1.5,
-            (0, 0, 255),
-            2,
-        )
-        cv2.putText(
-            img_draw,
-            "Big Forest Fire",
-            (30, 47),
-            cv2.FONT_HERSHEY_PLAIN,
-            1.5,
-            (0, 0, 255),
-            2,
-        )
-    elif large_of_fire > 3500:
-        cv2.rectangle(img_draw, (20, 20), (280, 85), (0, 255, 0), cv2.FILLED)
-        cv2.putText(
-            img_draw,
-            f"{round(large_of_fire)}",
-            (30, 70),
-            cv2.FONT_HERSHEY_PLAIN,
-            1.5,
-            (0, 0, 255),
-            2,
-        )
-        cv2.putText(
-            img_draw,
-            "Medium Forest Fire",
-            (30, 47),
-            cv2.FONT_HERSHEY_PLAIN,
-            1.5,
-            (0, 0, 255),
-            2,
-        )
-    elif large_of_fire > 100:
-        cv2.rectangle(img_draw, (20, 20), (255, 85), (0, 255, 0), cv2.FILLED)
-        cv2.putText(
-            img_draw,
-            f"{round(large_of_fire)}",
-            (30, 70),
-            cv2.FONT_HERSHEY_PLAIN,
-            1.5,
-            (0, 0, 255),
-            2,
-        )
-        cv2.putText(
-            img_draw,
-            "Small Forest Fire",
-            (30, 47),
-            cv2.FONT_HERSHEY_PLAIN,
-            1.5,
-            (0, 0, 255),
-            2,
-        )
+    if value_parser.forest_fire_video:
+        if large_of_fire > value_parser.high_area_fire:
+            cv2.rectangle(img_draw, (20, 20), (230, 85), (0, 255, 0), cv2.FILLED)
+            cv2.putText(
+                img_draw,
+                f"{round(large_of_fire)}",
+                (30, 70),
+                cv2.FONT_HERSHEY_PLAIN,
+                1.5,
+                (0, 0, 255),
+                2,
+            )
+            cv2.putText(
+                img_draw,
+                "Big Forest Fire",
+                (30, 47),
+                cv2.FONT_HERSHEY_PLAIN,
+                1.5,
+                (0, 0, 255),
+                2,
+            )
+        elif large_of_fire > value_parser.medium_area_fire:
+            cv2.rectangle(img_draw, (20, 20), (280, 85), (0, 255, 0), cv2.FILLED)
+            cv2.putText(
+                img_draw,
+                f"{round(large_of_fire)}",
+                (30, 70),
+                cv2.FONT_HERSHEY_PLAIN,
+                1.5,
+                (0, 0, 255),
+                2,
+            )
+            cv2.putText(
+                img_draw,
+                "Medium Forest Fire",
+                (30, 47),
+                cv2.FONT_HERSHEY_PLAIN,
+                1.5,
+                (0, 0, 255),
+                2,
+            )
+        elif large_of_fire > value_parser.low_area_fire:
+            cv2.rectangle(img_draw, (20, 20), (255, 85), (0, 255, 0), cv2.FILLED)
+            cv2.putText(
+                img_draw,
+                f"{round(large_of_fire)}",
+                (30, 70),
+                cv2.FONT_HERSHEY_PLAIN,
+                1.5,
+                (0, 0, 255),
+                2,
+            )
+            cv2.putText(
+                img_draw,
+                "Small Forest Fire",
+                (30, 47),
+                cv2.FONT_HERSHEY_PLAIN,
+                1.5,
+                (0, 0, 255),
+                2,
+            )
 
     # Stack Images
     img_result = stack_images(1, ([img, fire_mask], [img_preprocessing, img_draw]))
@@ -212,6 +261,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 # Display Total Large of Fire
-root = tk.Tk()
-root.withdraw()
-messagebox.showinfo("Info", f"Total large of fire is {round(sum(total_large_of_fire))}")
+if value_parser.forest_fire_video:
+    root = tk.Tk()
+    root.withdraw()
+    messagebox.showinfo("Info", f"Total large of fire is {round(sum(total_large_of_fire))}")
