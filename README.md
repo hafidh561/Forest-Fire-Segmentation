@@ -2,14 +2,10 @@
 
 ## Description
 
----
-
 Fire segmentation in your video forest fire with GUI application based. \
 You can use this code for other segmentation, but you must have color space method, value upper bound, value lower bound and your video for segmentation.
 
 ## Recommended Value
-
----
 
 1. **LAB**
     1. Lower = [82, 0, 159] \
@@ -59,8 +55,6 @@ You can use this code for other segmentation, but you must have color space meth
 
 ## Installation
 
----
-
 ### Installation Python
 
 ```bash
@@ -76,8 +70,6 @@ $ docker build -t hafidh561/forest-fire-segmentation:1.0 .
 ```
 
 ## Usage
-
----
 
 ### Usage Python
 
@@ -130,8 +122,6 @@ $ docker run --rm -e DISPLAY=$DISPLAY hafidh561/forest-fire-segmentation:1.0
 
 ## Screenshots
 
----
-
 ![video1.mp4](./screenshots/ss1.png "video1.mp4")
 
 ![video2.mp4](./screenshots/ss2.png "video2.mp4")
@@ -142,13 +132,9 @@ $ docker run --rm -e DISPLAY=$DISPLAY hafidh561/forest-fire-segmentation:1.0
 
 ## License
 
----
-
 See [LICENSE](./LICENSE).
 
 ## Changelog
-
----
 
 -   **1.0** Forest Fire Segmentation
 
