@@ -2,58 +2,52 @@
 
 ## Description
 
-Fire segmentation in your video forest fire with GUI application based. \
-You can use this code for other segmentation, but you must have a color space method, value upper bound, a value lower bound and your video for segmentation.
+Fire segmentation in your forest fire video with GUI application based. \
+You can use this code for another segmentation, but you must have a color space method, value upper bound, value lower bound and your video.
 
 ## Recommended Value
 
-1. **LAB**
-    1. Lower = [82, 0, 159] \
-       Upper = [255, 255, 255]
-    2. Lower = [157, 0, 148] \
-       Upper = [255, 255, 255]
-    3. Lower = [112, 0, 160] \
-       Upper = [255, 255, 255]
-    4. Lower = [114, 0, 168] \
-       Upper = [255, 182, 255]
-    5. Lower = [203, 0, 112] \
-       Upper = [255, 255, 255]
-    6. Lower = [117, 0, 156] \
-       Upper = [255, 255, 255]
-    7. Lower = [134, 0, 149] \
-       Upper = [255, 240, 255]
-2. **HSV**
-    1. Lower = [0, 0, 148] \
-       Upper = [179, 255, 255]
-    2. Lower = [6, 0, 216] \
-       Upper = [98, 255, 255]
-    3. Lower = [0, 143, 132] \
-       Upper = [179, 255, 255]
-    4. Lower = [0, 0, 210] \
-       Upper = [50, 255, 255]
-    5. Lower = [0, 0, 198] \
-       Upper = [179, 255, 255]
-    6. Lower = [2, 48, 165] \
-       Upper = [151, 255, 255]
-    7. Lower = [1, 29, 181] \
-       Upper = [137, 255, 255]
-3. **YCrCb**
-    1. Lower = [103, 0, 0] \
-       Upper = [255, 255, 255]
-    2. Lower = [152, 0, 0] \
-       Upper = [255, 255, 112]
-    3. Lower = [98, 0, 0] \
-       Upper = [255, 255, 86]
-    4. Lower = [121, 103, 0] \
-       Upper = [255, 255, 255]
-    5. Lower = [130, 0, 70] \
-       Upper = [255, 255, 255]
-    6. Lower = [119, 0, 0] \
-       Upper = [255, 255, 151]
-    7. Lower = [121, 21, 14] \
-       Upper = [255, 255, 193]
+### LAB
+
+| Lower     | Upper       |
+| --------- | ----------- |
+| 82 0 159  | 255 255 255 |
+| 157 0 148 | 255 255 255 |
+| 112 0 160 | 255 255 255 |
+| 114 0 168 | 255 182 255 |
+| 203 0 112 | 255 255 255 |
+| 117 0 156 | 255 255 255 |
+| 134 0 149 | 255 240 255 |
+
+### HSV
+
+| Lower     | Upper       |
+| --------- | ----------- |
+| 0 0 148   | 179 255 255 |
+| 6 0 216   | 98 255 255  |
+| 0 143 132 | 179 255 255 |
+| 0 0 210   | 50 255 255  |
+| 0 0 198   | 179 255 255 |
+| 2 48 165  | 151 255 255 |
+| 1 29 181  | 137 255 255 |
+
+### YCrCb
+
+| Lower     | Upper       |
+| --------- | ----------- |
+| 103 0 0   | 255 255 255 |
+| 152 0 0   | 255 255 112 |
+| 98 0 0    | 255 255 86  |
+| 121 103 0 | 255 255 255 |
+| 130 0 70  | 255 255 255 |
+| 119 0 0   | 255 255 151 |
+| 121 21 14 | 255 255 193 |
 
 ## Installation
+
+```bash
+$ git clone https://github.com/hafidh561/Forest-Fire-Segmentation.git
+```
 
 ### Installation Python
 
@@ -168,20 +162,20 @@ $ docker run --rm -e DISPLAY=$DISPLAY hafidh561/forest-fire-segmentation:1.0
 
 ## Screenshots
 
-![video1.mp4](./screenshots/ss1.png "video1.mp4")
+![video1.mp4](./screenshots/ss1.gif "video1.mp4")
 
-![video2.mp4](./screenshots/ss2.png "video2.mp4")
+![video2.mp4](./screenshots/ss2.gif "video2.mp4")
 
 ![video3.mp4](./screenshots/ss3.png "video3.mp4")
 
 ![video4.mp4](./screenshots/ss4.png "video4.mp4")
 
+## Report Article
+
+-   [Indonesian Language](https://docs.google.com/document/d/1jCI-Ev_9UF6dTyDjWhQDyNux5kJUfovuri5XxY9DmWY/edit?usp=sharing)
+
 ## License
 
 [MIT LICENSE](./LICENSE)
-
-## Changelog
-
--   **1.0** Forest Fire Segmentation
 
 © Developed by [hafidh561](https://github.com/hafidh561) - Internship at Nodeflux
