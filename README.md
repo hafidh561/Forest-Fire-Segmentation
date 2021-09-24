@@ -55,7 +55,8 @@ $ git clone https://github.com/hafidh561/Forest-Fire-Segmentation.git
 # Python version 3.8 or more
 $ pip install -r requirements.txt
 
-# (Optional) Download example video
+# Download video
+# Make sure put your video in ./test_video
 $ python download_video.py
 ```
 
@@ -108,11 +109,11 @@ $ python app.py -l 121 21 14 -u 255 255 193 -m ycrcb -haf 7000 -maf 3500 -laf 10
 #### Prerequisite for Linux
 
 ```bash
-# Exposo your xhost
+# Expose your xhost
 $ xhost +local:docker
 
 # When you finish, you can return the access control by using the following
-$ # xhost -local:docker
+$ xhost -local:docker
 
 # Add environment variables
 $ XSOCK=/tmp/.X11-unix

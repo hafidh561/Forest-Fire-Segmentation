@@ -140,5 +140,5 @@ cython_debug/
 # Laporan
 Laporan/
 
-# src
-src/
+# Test video
+test_video/
