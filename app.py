@@ -10,7 +10,7 @@ import cv2
 LOWER_VALUE = np.array((82, 0, 159), dtype="uint8")
 UPPER_VALUE = np.array((255, 255, 255), dtype="uint8")
 METHOD = "lab"
-SOURCE_VIDEO = "./test_video/video1.mp4"
+SOURCE_VIDEO = "./test_videos/video1.mp4"
 HIGH_AREA_FIRE = 7000
 MEDIUM_AREA_FIRE = 3500
 LOW_AREA_FIRE = 100

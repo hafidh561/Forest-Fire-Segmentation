@@ -140,8 +140,8 @@ cython_debug/
 # Laporan
 Laporan/
 
-# Test video
-test_video/
+# Test videos directory
+test_videos/
 
 # Download video file
 download_video.py

@@ -60,7 +60,7 @@ $ pip install -r requirements.txt
 
 ```bash
 # Newest docker version
-# Make sure put your test video in directory ./test_video/
+# Make sure put your test video in directory ./test_videos/
 $ docker build -t hafidh561/forest-fire-segmentation:1.0 .
 ```
 

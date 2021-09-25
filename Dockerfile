@@ -10,9 +10,9 @@ apt-get install ffmpeg libsm6 libxext6 -y && \
 apt-get install tk -y
 
 # Copy all files into working directory
-COPY app.py download_video.py requirements.txt /home/app/
+COPY app.py requirements.txt /home/app/
 COPY ForestFireSegmentation/ /home/app/ForestFireSegmentation/
-COPY test_video/ /home/app/test_video/
+COPY /test_videos /home/app/test_videos/
 
 # Instal python libraries
 RUN pip install -r requirements.txt
