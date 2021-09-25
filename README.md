@@ -127,7 +127,7 @@ $ xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 ```
 
 ```bash
-$ docker run --rm -e DISPLAY=<your local ip address>:0 hafidh561/forest-fire-segmentation:1.0 -h
+$ docker run --rm -e DISPLAY=<YOUR LOCAL IP ADDRESS>:0 hafidh561/forest-fire-segmentation:1.0 -h
 usage: app.py [-h] [-l LOWER [LOWER ...]] [-u UPPER [UPPER ...]] [-m METHOD]
               [-haf HIGH_AREA_FIRE] [-maf MEDIUM_AREA_FIRE]
               [-laf LOW_AREA_FIRE] [-v VIDEO] [-ffv FOREST_FIRE_VIDEO]
@@ -155,7 +155,7 @@ optional arguments:
 $ docker run --rm -e DISPLAY=192.168.0.2:0 hafidh561/forest-fire-segmentation:1.0 -l 121 21 14 -u 255 255 193 -m hsv -haf 7000 -maf 3500 -laf 100 -v ./src/video2.mp4 -ffv true
 
 # For Operating System Windows
-$ docker run --rm -e DISPLAY=<your local ip address>:0 hafidh561/forest-fire-segmentation:1.0
+$ docker run --rm -e DISPLAY=<YOUR LOCAL IP ADDRESS>:0 hafidh561/forest-fire-segmentation:1.0
 
 # For Operating System Linux
 $ docker run --rm -e DISPLAY=$DISPLAY hafidh561/forest-fire-segmentation:1.0
