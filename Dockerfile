@@ -5,7 +5,7 @@ FROM python:3.8.12-slim
 WORKDIR /home/app
 
 # Create directory for video
-RUN mkdir /home/app/src /home/app/ForestFireSegmentation
+RUN mkdir /home/app/test_video /home/app/ForestFireSegmentation
 
 # Install packages
 RUN apt-get update -y && apt-get upgrade -y && \
@@ -20,6 +20,7 @@ COPY ForestFireSegmentation /home/app/ForestFireSegmentation
 RUN pip install -r requirements.txt
 
 # (OPTIONAL) Download example video
+# Make sure put your video in directory ./test_video/
 RUN python download_video.py
 
 # Run script
