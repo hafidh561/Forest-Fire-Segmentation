@@ -54,16 +54,13 @@ $ git clone https://github.com/hafidh561/Forest-Fire-Segmentation.git
 ```bash
 # Python version 3.8 or more
 $ pip install -r requirements.txt
-
-# Download video
-# Make sure put your video in ./test_video
-$ python download_video.py
 ```
 
 ### Installation Docker
 
 ```bash
 # Newest docker version
+# Make sure put your video in ./test_video
 $ docker build -t hafidh561/forest-fire-segmentation:1.0 .
 ```
 
